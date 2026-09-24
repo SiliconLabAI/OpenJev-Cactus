@@ -1,0 +1,45 @@
+[
+  {
+    "name": "set_lights",
+    "description": "Control lights in a room: turn on/off and set brightness from 0 to 100. Use this for dimming, brightening, or switching lights.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "room": {
+          "type": "string",
+          "description": "Room name such as living room, kitchen, bedroom"
+        },
+        "on": {
+          "type": "boolean",
+          "description": "true = on, false = off"
+        },
+        "brightness": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Brightness percent 0-100"
+        }
+      },
+      "required": ["room"]
+    }
+  },
+  {
+    "name": "set_thermostat",
+    "description": "Set the room thermostat temperature and mode (heat, cool, or auto).",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 35
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["heat", "cool", "auto"]
+        }
+      },
+      "required": ["temperature"]
+    }
+  }
+]
