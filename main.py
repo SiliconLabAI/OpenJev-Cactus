@@ -286,7 +286,7 @@ async def systemone(req: SystemOneRequest):
             properties[qid] = {
                 "type": "string",
                 "enum": levels,
-                "description": f"{q.instructions}. Levels: {crit}",
+                "description": f"{q.instructions}",
             }
         required.append(qid)
 
@@ -309,12 +309,12 @@ async def systemone(req: SystemOneRequest):
     }
 
     if isinstance(req.state, (dict, list)):
-        state_text = json.dumps(req.state, ensure_ascii=False, strict=False)
+        state_text = json.dumps(req.state, ensure_ascii=False)
     else:
         state_text = str(req.state)
 
     try:
-        extracted = needle.extract(state_text, schema)
+        extracted = needle.extract(state_text, schema, strict=False)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Needle extract error: {str(e)}")
 
